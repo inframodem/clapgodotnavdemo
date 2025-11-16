@@ -1,0 +1,14 @@
+#Ignore executables
+*.exe
+
+#Ignore .env files
+.env
+
+#Ignore CMakePresets.json as its Machine depenedent
+CMakePresets.json
+
+#Keep OpenCV Build from being pushed
+opencv_src/out/
+
+#Don't Include .godot which contains Machine specific caches
+godot_src/.godot
