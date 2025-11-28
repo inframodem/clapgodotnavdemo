@@ -8,36 +8,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(600, 600)
-layout_mode = 2
+layout_mode = 0
+offset_top = 0.0040283203
+offset_right = 1152.0
+offset_bottom = 647.996
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="ScrollContainer" type="ScrollContainer" parent="AspectRatioContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_constants/separation = 20
 
-[node name="16x16 Tile Set" type="Button" parent="AspectRatioContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="16x16 Tile Set" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Dungeon (16x16 Set)"
 
-[node name="Park" type="Button" parent="AspectRatioContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="128x128 Tile Set" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24

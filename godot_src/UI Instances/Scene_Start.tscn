@@ -1,4 +1,75 @@
-[gd_scene format=3 uid="uid://bpptikud0j15c"]
+[gd_scene load_steps=12 format=3 uid="uid://bpptikud0j15c"]
+
+[ext_resource type="Texture2D" uid="uid://b8resjqah13ec" path="res://Assets/UI Components/circle-svgrepo-com.svg" id="1_qbhdu"]
+
+[sub_resource type="DPITexture" id="DPITexture_ttyw2"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\" fill-opacity=\".37\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_jrv0g"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_1qpxd"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"4\" height=\"8\"><path fill=\"#fff\" fill-opacity=\".25\" d=\"M1 0h2v16H1z\"/></svg>
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhhk3"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cs85k"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gau1"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="Theme" id="Theme_50chs"]
+HSlider/constants/center_grabber = 0
+HSlider/constants/grabber_offset = -4
+HSlider/constants/tick_offset = 0
+HSlider/icons/grabber = ExtResource("1_qbhdu")
+HSlider/icons/grabber_disabled = SubResource("DPITexture_ttyw2")
+HSlider/icons/grabber_highlight = SubResource("DPITexture_jrv0g")
+HSlider/icons/tick = SubResource("DPITexture_1qpxd")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_vhhk3")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_cs85k")
+HSlider/styles/slider = SubResource("StyleBoxFlat_8gau1")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_t61ep"]
+thickness = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3c1p0"]
+bg_color = Color(0.562261, 0.6589808, 0.9141461, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wcq7"]
+bg_color = Color(0.7666196, 0.76661956, 0.76661944, 1)
 
 [node name="SceneStart" type="Control"]
 layout_mode = 3
@@ -7,3 +78,85 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.7778
+
+[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer"]
+z_index = -1
+layout_mode = 2
+color = Color(0, 0, 0, 0.1882353)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="Interval Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Screenshot Interval: "
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_50chs")
+theme_override_constants/center_grabber = 1
+theme_override_styles/slider = SubResource("StyleBoxLine_t61ep")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3c1p0")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_8wcq7")
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 0.5
+tick_count = 10
+ticks_on_borders = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_constants/minimum_character_width = 5
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Directory Name (A-Za-z0-9_):"
+max_length = 24
+emoji_menu_enabled = false
+
+[node name="Save Scene" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Save Scene"
+
+[node name="Load Scene" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Load Scene (Needs to Exist)"
+
+[node name="Warning Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1

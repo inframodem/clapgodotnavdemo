@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crkdcgnyti3bd"
-path="res://.godot/imported/FreeHorrorUi.png-48676efdd6a9eb9db9234a1f6fd649c0.ctex"
+uid="uid://b8resjqah13ec"
+path="res://.godot/imported/circle-svgrepo-com.svg-cb288e1d928e9452217cc6b384fc27a4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI Components/FreeHorrorUi.png"
-dest_files=["res://.godot/imported/FreeHorrorUi.png-48676efdd6a9eb9db9234a1f6fd649c0.ctex"]
+source_file="res://Assets/UI Components/circle-svgrepo-com.svg"
+dest_files=["res://.godot/imported/circle-svgrepo-com.svg-cb288e1d928e9452217cc6b384fc27a4.ctex"]
 
 [params]
 
@@ -36,5 +36,8 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=42
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
