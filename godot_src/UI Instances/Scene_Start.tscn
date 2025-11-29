@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bpptikud0j15c"]
+[gd_scene load_steps=13 format=3 uid="uid://bpptikud0j15c"]
 
 [ext_resource type="Texture2D" uid="uid://b8resjqah13ec" path="res://Assets/UI Components/circle-svgrepo-com.svg" id="1_qbhdu"]
+[ext_resource type="Theme" uid="uid://c645tdf2p6yf3" path="res://Assets/UI Components/UI Button theme.tres" id="2_ttyw2"]
 
 [sub_resource type="DPITexture" id="DPITexture_ttyw2"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\" fill-opacity=\".37\"/></svg>
@@ -148,12 +149,14 @@ emoji_menu_enabled = false
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_ttyw2")
 text = "Save Scene"
 
 [node name="Load Scene" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_ttyw2")
 text = "Load Scene (Needs to Exist)"
 
 [node name="Warning Label" type="Label" parent="MarginContainer/VBoxContainer"]

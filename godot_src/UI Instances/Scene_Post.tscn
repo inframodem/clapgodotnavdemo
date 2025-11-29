@@ -87,3 +87,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_dnnh6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q7kdn")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yvxrq")
 text = "Exit Scene"
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Clap: 
+Ransac: 
+Control: "

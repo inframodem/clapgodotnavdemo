@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://7l0cwjgb1lqv"]
+[gd_scene load_steps=3 format=3 uid="uid://7l0cwjgb1lqv"]
+
+[ext_resource type="Theme" uid="uid://c645tdf2p6yf3" path="res://Assets/UI Components/UI Button theme.tres" id="1_jqge4"]
+[ext_resource type="Script" uid="uid://djunxrny0iipn" path="res://UI Scripts/uistate_change_button.gd" id="1_lleqo"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -10,32 +13,51 @@ grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(600, 600)
-layout_mode = 0
-offset_top = 0.0040283203
-offset_right = 1152.0
-offset_bottom = 647.996
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
-custom_minimum_size = Vector2(400, 0)
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_constants/separation = 20
 
-[node name="16x16 Tile Set" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="16x16 Tile Set" type="Button" parent="MarginContainer/VBoxContainer2/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
+theme = ExtResource("1_jqge4")
 theme_override_font_sizes/font_size = 24
 text = "Dungeon (16x16 Set)"
 
-[node name="128x128 Tile Set" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="128x128 Tile Set" type="Button" parent="MarginContainer/VBoxContainer2/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
+theme = ExtResource("1_jqge4")
 theme_override_font_sizes/font_size = 24
 text = "Park (128x128 Set)"
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_jqge4")
+theme_override_font_sizes/font_size = 32
+text = "Return to Menu"
+script = ExtResource("1_lleqo")
