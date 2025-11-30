@@ -1,9 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcqbccpdju84k"]
+[gd_scene load_steps=14 format=3 uid="uid://bcqbccpdju84k"]
 
 [ext_resource type="Script" uid="uid://c0yc0134xevs0" path="res://UI Scripts/game_controller.gd" id="1_0t6y7"]
 [ext_resource type="PackedScene" uid="uid://byxvirbpou8fx" path="res://UI Instances/Main Menu.tscn" id="1_i50f7"]
 [ext_resource type="Script" uid="uid://iik67ykix177" path="res://UI Scripts/ui_state_controller.gd" id="1_le5uf"]
 [ext_resource type="PackedScene" uid="uid://ddrext3rdd073" path="res://Main Scenes/dungeon_scene.tscn" id="1_mr08k"]
+[ext_resource type="Texture2D" uid="uid://cet7d322qnvb" path="res://Assets/UI Components/scientist sprites/sci down/scientist run down.tres" id="4_1ksql"]
+[ext_resource type="Texture2D" uid="uid://dbd1fssbdrk5n" path="res://Assets/UI Components/scientist sprites/sci down/animate down1.png" id="4_ar2xh"]
+[ext_resource type="Texture2D" uid="uid://bg3v8fb6hnapl" path="res://Assets/UI Components/scientist sprites/sci up/run up1.png" id="4_hapsy"]
+[ext_resource type="Texture2D" uid="uid://dugu8c2qi0401" path="res://Assets/UI Components/scientist sprites/sci left/scientist run left.tres" id="4_puc4w"]
+[ext_resource type="Script" uid="uid://dtlelopxmhrpt" path="res://UI Scripts/player_animation controller.gd" id="5_34csb"]
+[ext_resource type="Texture2D" uid="uid://cy0wm0rvnuuyu" path="res://Assets/UI Components/scientist sprites/sci right/animate right1.png" id="9_0rmar"]
+[ext_resource type="Texture2D" uid="uid://da8sv60y10bdj" path="res://Assets/UI Components/scientist sprites/sci up/scientist run up.tres" id="11_grsjk"]
+[ext_resource type="Texture2D" uid="uid://bmhrmooq33flt" path="res://Assets/UI Components/scientist sprites/sci right/scientist run right.tres" id="11_puc4w"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_puc4w"]
+load_path = "res://.godot/imported/animate left1.png-bf1c932192c002dac287c447fb09f8cb.ctex"
 
 [node name="ui_level" type="Node2D"]
 
@@ -13,19 +24,24 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+stretch = true
+stretch_shrink = 3
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(1536, 864)
+size = Vector2i(512, 288)
 render_target_update_mode = 4
 
 [node name="DungeonScene" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("1_mr08k")]
 
 [node name="UI_State Controller" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,6 +54,29 @@ script = ExtResource("1_le5uf")
 layout_mode = 1
 offset_top = -1.0
 offset_bottom = -1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_ar2xh")
+script = ExtResource("5_34csb")
+idleDown = ExtResource("4_ar2xh")
+idleUp = ExtResource("4_hapsy")
+idleLeft = SubResource("CompressedTexture2D_puc4w")
+idleRight = ExtResource("9_0rmar")
+runDown = ExtResource("4_1ksql")
+runUp = ExtResource("11_grsjk")
+runLeft = ExtResource("4_puc4w")
+runRight = ExtResource("11_puc4w")
 
 [node name="Game Controller" type="Node" parent="."]
 script = ExtResource("1_0t6y7")
