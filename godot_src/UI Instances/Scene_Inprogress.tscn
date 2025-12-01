@@ -1,4 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqbupmgq3ui50"]
+[gd_scene load_steps=16 format=3 uid="uid://bqbupmgq3ui50"]
+
+[ext_resource type="Script" uid="uid://d4mu7wnlah0rc" path="res://UI Instances/frametracker_label.gd" id="1_8lp83"]
+[ext_resource type="Texture2D" uid="uid://dbd1fssbdrk5n" path="res://Assets/UI Components/scientist sprites/sci down/animate down1.png" id="1_tsc6k"]
+[ext_resource type="Script" uid="uid://dtlelopxmhrpt" path="res://UI Scripts/player_animation controller.gd" id="2_8lp83"]
+[ext_resource type="Script" uid="uid://dhbx7q8m6v5ck" path="res://UI Scripts/stop_capture_vbutton.gd" id="2_rjppw"]
+[ext_resource type="Texture2D" uid="uid://bg3v8fb6hnapl" path="res://Assets/UI Components/scientist sprites/sci up/run up1.png" id="3_rjppw"]
+[ext_resource type="Texture2D" uid="uid://cy0wm0rvnuuyu" path="res://Assets/UI Components/scientist sprites/sci right/animate right1.png" id="4_txfym"]
+[ext_resource type="Texture2D" uid="uid://cet7d322qnvb" path="res://Assets/UI Components/scientist sprites/sci down/scientist run down.tres" id="5_ub1l3"]
+[ext_resource type="Texture2D" uid="uid://da8sv60y10bdj" path="res://Assets/UI Components/scientist sprites/sci up/scientist run up.tres" id="6_8vi57"]
+[ext_resource type="Texture2D" uid="uid://dugu8c2qi0401" path="res://Assets/UI Components/scientist sprites/sci left/scientist run left.tres" id="7_ei1sf"]
+[ext_resource type="Texture2D" uid="uid://bmhrmooq33flt" path="res://Assets/UI Components/scientist sprites/sci right/scientist run right.tres" id="8_gjoq8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8v3k"]
 bg_color = Color(0, 0, 0, 0.5294118)
@@ -15,6 +26,9 @@ bg_color = Color(0.28485027, 0.28485027, 0.2848502, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tr1f5"]
 bg_color = Color(0.43519226, 0.4351923, 0.43519217, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qib7y"]
+load_path = "res://.godot/imported/animate left1.png-bf1c932192c002dac287c447fb09f8cb.ctex"
 
 [node name="SceneInprogress" type="Control"]
 layout_mode = 3
@@ -59,6 +73,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 text = "Frame: 0"
 horizontal_alignment = 1
+script = ExtResource("1_8lp83")
 
 [node name="Button" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
@@ -72,3 +87,28 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_4ynqs")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_koslv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_tr1f5")
 text = "Stop Capture"
+script = ExtResource("2_rjppw")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_tsc6k")
+script = ExtResource("2_8lp83")
+idleDown = ExtResource("1_tsc6k")
+idleUp = ExtResource("3_rjppw")
+idleLeft = SubResource("CompressedTexture2D_qib7y")
+idleRight = ExtResource("4_txfym")
+runDown = ExtResource("5_ub1l3")
+runUp = ExtResource("6_8vi57")
+runLeft = ExtResource("7_ei1sf")
+runRight = ExtResource("8_gjoq8")

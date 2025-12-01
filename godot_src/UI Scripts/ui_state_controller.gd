@@ -9,6 +9,7 @@ func _ready() -> void:
 	scenes.append(preload("res://UI Instances/Options.tscn").instantiate())
 	scenes.append(preload("res://UI Instances/Level Select.tscn").instantiate())
 	scenes.append(preload("res://UI Instances/Scene_Start.tscn").instantiate())
+	scenes.append(preload("res://UI Instances/Scene_Inprogress.tscn").instantiate())
 	scenes.append(preload("res://UI Instances/Scene_Loading.tscn").instantiate())
 	scenes.append(preload("res://UI Instances/Scene_Post.tscn").instantiate())
 	currentLoadedScene = get_child(0)

@@ -1,4 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://miyltmhw26pc"]
+[gd_scene load_steps=14 format=3 uid="uid://miyltmhw26pc"]
+
+[ext_resource type="Texture2D" uid="uid://dbd1fssbdrk5n" path="res://Assets/UI Components/scientist sprites/sci down/animate down1.png" id="1_vt3ih"]
+[ext_resource type="Script" uid="uid://dtlelopxmhrpt" path="res://UI Scripts/player_animation controller.gd" id="2_q6mrm"]
+[ext_resource type="Texture2D" uid="uid://bg3v8fb6hnapl" path="res://Assets/UI Components/scientist sprites/sci up/run up1.png" id="3_kh7nu"]
+[ext_resource type="Texture2D" uid="uid://cy0wm0rvnuuyu" path="res://Assets/UI Components/scientist sprites/sci right/animate right1.png" id="4_hppg6"]
+[ext_resource type="Texture2D" uid="uid://cet7d322qnvb" path="res://Assets/UI Components/scientist sprites/sci down/scientist run down.tres" id="5_e0o52"]
+[ext_resource type="Texture2D" uid="uid://da8sv60y10bdj" path="res://Assets/UI Components/scientist sprites/sci up/scientist run up.tres" id="6_yi78d"]
+[ext_resource type="Texture2D" uid="uid://dugu8c2qi0401" path="res://Assets/UI Components/scientist sprites/sci left/scientist run left.tres" id="7_54fv4"]
+[ext_resource type="Texture2D" uid="uid://bmhrmooq33flt" path="res://Assets/UI Components/scientist sprites/sci right/scientist run right.tres" id="8_rf4d1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3aue"]
 bg_color = Color(0.38170326, 0.38170326, 0.3817031, 1)
@@ -16,6 +25,9 @@ bg_color = Color(0.427493, 0.42749307, 0.42749295, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yvxrq"]
 bg_color = Color(0.65012825, 0.6501283, 0.6501282, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_20ty4"]
+load_path = "res://.godot/imported/animate left1.png-bf1c932192c002dac287c447fb09f8cb.ctex"
 
 [node name="ScenePost" type="Control"]
 layout_mode = 3
@@ -93,3 +105,27 @@ layout_mode = 2
 text = "Clap: 
 Ransac: 
 Control: "
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_vt3ih")
+script = ExtResource("2_q6mrm")
+idleDown = ExtResource("1_vt3ih")
+idleUp = ExtResource("3_kh7nu")
+idleLeft = SubResource("CompressedTexture2D_20ty4")
+idleRight = ExtResource("4_hppg6")
+runDown = ExtResource("5_e0o52")
+runUp = ExtResource("6_yi78d")
+runLeft = ExtResource("7_54fv4")
+runRight = ExtResource("8_rf4d1")
