@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c0yc0134xevs0" path="res://UI Scripts/game_controller.gd" id="1_0t6y7"]
 [ext_resource type="PackedScene" uid="uid://byxvirbpou8fx" path="res://UI Instances/Main Menu.tscn" id="1_i50f7"]
 [ext_resource type="Script" uid="uid://iik67ykix177" path="res://UI Scripts/ui_state_controller.gd" id="1_le5uf"]
-[ext_resource type="PackedScene" uid="uid://ddrext3rdd073" path="res://Main Scenes/dungeon_scene.tscn" id="1_mr08k"]
+[ext_resource type="PackedScene" uid="uid://4v1l2538d7ei" path="res://Main Scenes/park_scene.tscn" id="1_puc4w"]
 [ext_resource type="Texture2D" uid="uid://cet7d322qnvb" path="res://Assets/UI Components/scientist sprites/sci down/scientist run down.tres" id="4_1ksql"]
 [ext_resource type="Texture2D" uid="uid://dbd1fssbdrk5n" path="res://Assets/UI Components/scientist sprites/sci down/animate down1.png" id="4_ar2xh"]
 [ext_resource type="Texture2D" uid="uid://bg3v8fb6hnapl" path="res://Assets/UI Components/scientist sprites/sci up/run up1.png" id="4_hapsy"]
@@ -30,15 +30,14 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 stretch = true
-stretch_shrink = 3
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(512, 288)
+size = Vector2i(1536, 864)
 render_target_update_mode = 4
 
-[node name="DungeonScene" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("1_mr08k")]
+[node name="ParkScene" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("1_puc4w")]
 
 [node name="UI_State Controller" type="Control" parent="CanvasLayer"]
 visible = false
