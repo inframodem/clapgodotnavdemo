@@ -22,4 +22,4 @@ func _on_text_changed(new_text: String) -> void:
 		self.caret_column = new_text.length()
 		
 	gamecontroller.setDirectory(self.text)
-	print(gamecontroller.filePath)
+	#print(gamecontroller.filePath)

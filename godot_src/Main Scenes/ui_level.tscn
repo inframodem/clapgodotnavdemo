@@ -38,8 +38,6 @@ script = ExtResource("1_le5uf")
 
 [node name="MainMenu" parent="CanvasLayer/UI_State Controller" instance=ExtResource("1_i50f7")]
 layout_mode = 1
-offset_top = -1.0
-offset_bottom = -1.0
 
 [node name="Game Controller" type="Node" parent="."]
 script = ExtResource("1_0t6y7")
