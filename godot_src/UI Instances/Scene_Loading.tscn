@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cw6tsy4f6llym"]
+[gd_scene load_steps=3 format=3 uid="uid://cw6tsy4f6llym"]
 
 [ext_resource type="Theme" uid="uid://c645tdf2p6yf3" path="res://Assets/UI Components/UI Button theme.tres" id="1_uvd5s"]
+[ext_resource type="Script" uid="uid://cxca336piably" path="res://UI Instances/skip button.gd" id="2_80knw"]
 
 [node name="SceneLoading" type="Control"]
 layout_mode = 3
@@ -44,3 +45,4 @@ size_flags_horizontal = 4
 theme = ExtResource("1_uvd5s")
 theme_override_font_sizes/font_size = 29
 text = "Skip"
+script = ExtResource("2_80knw")

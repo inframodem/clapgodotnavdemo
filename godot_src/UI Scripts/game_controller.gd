@@ -54,8 +54,10 @@ func startCapture() -> bool:
 		DirAccess.make_dir_recursive_absolute(cpath)
 		changeUIState(Globals.UI_state.Level_Inprogress)
 		#make frame 0
+		#go through a couple frames make sure everything is rendering
 		await get_tree().process_frame
 		await get_tree().process_frame
+		#get 
 		var frame = viewport.get_texture().get_image()
 		frame.save_png(cpath + "/" + filePath + "-0.png")
 		capturedFrame += 1
@@ -76,6 +78,7 @@ func captureProcess(delta: float) -> void:
 func stopCapture() -> void:
 	isCapturing = false
 	capturedFrame = 0
+	sinceLastFrame = 0.0
 
 func removeDirectory() -> bool:
 	var cpath = "user://" + filePath 
