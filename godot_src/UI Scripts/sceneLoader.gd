@@ -30,14 +30,7 @@ func loadScene(nextScene : Globals.Scenes) -> bool:
 		hasLoaded = true
 	else:
 		self.stretch_shrink = cameraScaleList[nextScene]
-		ResourceLoader.load_threaded_request(scenePathList[nextScene])
-		while true:
-			var status := ResourceLoader.load_threaded_get_status(scenePathList[nextScene])
-			if status == ResourceLoader.THREAD_LOAD_LOADED:
-				break
-			await get_tree().process_frame
-
-		var packedScene : PackedScene = ResourceLoader.load_threaded_get(scenePathList[nextScene])
+		var packedScene : PackedScene = ResourceLoader.load(scenePathList[nextScene])
 		var sceneInstance = packedScene.instantiate()
 		viewport.add_child(sceneInstance)
 		hasLoaded = true

@@ -36,7 +36,7 @@ func setPause(pause: bool) -> void:
 	isPaused = pause
 
 func changeGameScene(cScene : Globals.Scenes) -> bool:
-	var status : bool = await sceneLoader.loadScene(cScene)
+	var status : bool = sceneLoader.loadScene(cScene)
 	if status:
 		print("Successfully Changed Scene")
 		return status
@@ -48,12 +48,14 @@ func startCapture() -> bool:
 	var cpath = "user://" + filePath
 	if DirAccess.dir_exists_absolute(cpath):
 		return false
-	var status = await changeGameScene(selectedScene)
+	var status = changeGameScene(selectedScene)
 	if status:
 		viewport = sceneLoader.getSubViewport()
 		DirAccess.make_dir_recursive_absolute(cpath)
 		changeUIState(Globals.UI_state.Level_Inprogress)
 		#make frame 0
+		await get_tree().process_frame
+		await get_tree().process_frame
 		var frame = viewport.get_texture().get_image()
 		frame.save_png(cpath + "/" + filePath + "-0.png")
 		capturedFrame += 1
