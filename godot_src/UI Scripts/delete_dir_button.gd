@@ -25,6 +25,7 @@ func _pressed() -> void:
 		return
 	elif numPressed > 0:
 		gamecontroller.removeDirectory()
+		self.text = "Delete Scene"
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

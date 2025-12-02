@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bqbupmgq3ui50"]
 
-[ext_resource type="Script" uid="uid://d4mu7wnlah0rc" path="res://UI Instances/frametracker_label.gd" id="1_8lp83"]
+[ext_resource type="Script" uid="uid://d4mu7wnlah0rc" path="res://UI Scripts/frametracker_label.gd" id="1_8lp83"]
 [ext_resource type="Texture2D" uid="uid://dbd1fssbdrk5n" path="res://Assets/UI Components/scientist sprites/sci down/animate down1.png" id="1_tsc6k"]
 [ext_resource type="Script" uid="uid://dtlelopxmhrpt" path="res://UI Scripts/player_animation controller.gd" id="2_8lp83"]
 [ext_resource type="Script" uid="uid://dhbx7q8m6v5ck" path="res://UI Scripts/stop_capture_vbutton.gd" id="2_rjppw"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://da8sv60y10bdj" path="res://Assets/UI Components/scientist sprites/sci up/scientist run up.tres" id="6_8vi57"]
 [ext_resource type="Texture2D" uid="uid://dugu8c2qi0401" path="res://Assets/UI Components/scientist sprites/sci left/scientist run left.tres" id="7_ei1sf"]
 [ext_resource type="Texture2D" uid="uid://bmhrmooq33flt" path="res://Assets/UI Components/scientist sprites/sci right/scientist run right.tres" id="8_gjoq8"]
+
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qib7y"]
 load_path = "res://.godot/imported/animate left1.png-bf1c932192c002dac287c447fb09f8cb.ctex"
