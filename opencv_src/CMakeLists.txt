@@ -19,8 +19,11 @@ function(load_env_file ENV_FILE)
     endif()
 endfunction()
 load_env_file("${CMAKE_SOURCE_DIR}/.env")
-message(STATUS "OpenCV_DIR = ${OpenCV_INCLUDE_DIRS}")
+message(STATUS "OpenCV_DIR = ${OpenCV_DIR}")
 find_package( OpenCV REQUIRED)
+message(STATUS "OpenCV_Libs = ${OpenCV_LIBS}")
+message(STATUS "OpenCV_INCLUDE_DIRS = ${OpenCV_INCLUDE_DIRS}")
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 file(GLOB SRC_FILES
     "*.cpp"
@@ -28,4 +31,4 @@ file(GLOB SRC_FILES
 
 
 add_executable(opencvclap ${SRC_FILES})
-target_link_libraries(opencvclap ${OpenCV_LIBS})
+target_link_libraries(opencvclap PRIVATE ${OpenCV_LIBS})

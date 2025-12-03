@@ -6,6 +6,7 @@ var gamecontroller
 
 func _ready() -> void:
 	gamecontroller = get_tree().get_current_scene().get_node("Game Controller")
+	gamecontroller.characterSetter(self)
 
 func _physics_process(delta: float) -> void:
 

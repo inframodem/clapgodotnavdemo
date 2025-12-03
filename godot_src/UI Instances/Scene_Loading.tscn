@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cw6tsy4f6llym"]
+[gd_scene load_steps=4 format=3 uid="uid://cw6tsy4f6llym"]
 
+[ext_resource type="Script" uid="uid://3n4q3slrhb7o" path="res://UI Instances/captureFinishHandler.gd" id="1_gshvg"]
 [ext_resource type="Theme" uid="uid://c645tdf2p6yf3" path="res://Assets/UI Components/UI Button theme.tres" id="1_uvd5s"]
 [ext_resource type="Script" uid="uid://cxca336piably" path="res://UI Scripts/skip button.gd" id="2_80knw"]
 
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_gshvg")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

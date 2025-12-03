@@ -65,6 +65,7 @@ func startCapture() -> bool:
 		var frame = viewport.get_texture().get_image()
 		frame.save_png(cpath + "/" + filePath + "-0.png")
 		capturedFrame += 1
+		ControlPosList.append(Vector2(0.0, 0.0))
 		isPaused = false
 		isCapturing = true
 	return status
@@ -78,6 +79,7 @@ func captureProcess(delta: float) -> void:
 	var frame = viewport.get_texture().get_image()
 	frame.save_png(cpath + "/" + filePath + "-" + str(capturedFrame) + ".png")
 	capturedFrame += 1
+	LogControlPos()
 	
 func stopCapture() -> void:
 	isCapturing = false
@@ -119,6 +121,7 @@ func LogControlPos() -> void:
 	if cameraControl == null:
 		return
 	ControlPosList.append(cameraControl.position)
+	print("logging: " + str(cameraControl.position))
 
 func exportControlList() -> void:
 	var controlVecLines = []
@@ -135,7 +138,7 @@ func exportControlList() -> void:
 	var writePath = "user://" + filePath + "/" + filePath + "_CONTROL.txt"
 	for vect in range(0, controlVecLines.size()):
 		Lines.append("directoryName-" + str(vect) + ".png" + " > " +
-		 "directoryName-" + str(vect + 1) + ".png : " + str(controlVecLines.x) + " " + str(controlVecLines.y))
+		 "directoryName-" + str(vect + 1) + ".png : " + str(controlVecLines[vect].x) + " " + str(controlVecLines[vect].y))
 	var file = FileAccess.open(writePath, FileAccess.WRITE)
 	for line in Lines:
 		file.store_line(line)
