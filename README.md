@@ -17,7 +17,7 @@ Launch Godot and simply import the godot_src directory as a project.
   
 ### OpenCV Set-up
 Currently I will only be including a Windows instructions for set-up mostly due to the seeming  
-neccessity of the Visual Studio 2022 x64 compiler for building OpenCV cmake projects. I'll be looking into Linux compliment if there's time.
+neccessity of the Visual Studio 2022 x64 compiler for building OpenCV cmake projects. Unfortunately due to how OpenCV pre-compiled releases are done, this project will only work on Windows.
 
 ### Windows Set-up for OpenCV with VSCode
 Download and install [OpenCV](https://code.visualstudio.com/download)'s Windows Release, for this project I used 4.12.  

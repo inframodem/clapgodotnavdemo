@@ -106,7 +106,7 @@ Point2d PhotoMatcher::clapTranslateFinder(vector<Point2f>& pointsnew, vector<Poi
             clusterData.at<float>(i, 0) = diffpoints[i].x;
             clusterData.at<float>(i, 1) = diffpoints[i].y;
         }
-        kmeans(clusterData, 1, labels, TermCriteria(TermCriteria::EPS + TermCriteria::MAX_ITER, 50, 0.5), 3, KMEANS_PP_CENTERS, centers );
+        kmeans(clusterData, 1, labels, TermCriteria(TermCriteria::EPS + TermCriteria::MAX_ITER, 50, 0.1), 3, KMEANS_PP_CENTERS, centers );
         vector<pair<float, Point2f>> distPairs;
         float centerX = centers.at<float>(0, 0);
         float centerY = centers.at<float>(0, 1);
@@ -121,7 +121,7 @@ Point2d PhotoMatcher::clapTranslateFinder(vector<Point2f>& pointsnew, vector<Poi
         int numToKeep = static_cast<int>(0.8f * diffpoints.size());
         sort(distPairs.begin(), distPairs.end(),
           [](const std::pair<float, Point2f> &a, const std::pair<float, Point2f> &b) {
-              return a.first < b.first; // smallest distance first
+              return a.first < b.first;
           });
         diffpoints.clear();
         for(int i = 0 ; i < numToKeep; i++){
