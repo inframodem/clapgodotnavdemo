@@ -135,6 +135,9 @@ func exportControlList() -> void:
 		controlVecLines.append(translationVector)
 		pos1 = pos2
 	var Lines = []
+	var cpath = "user://" + filePath
+	if !DirAccess.dir_exists_absolute(cpath):
+		return
 	var writePath = "user://" + filePath + "/" + filePath + "_CONTROL.txt"
 	for vect in range(0, controlVecLines.size()):
 		Lines.append("directoryName-" + str(vect) + ".png" + " > " +
@@ -143,3 +146,9 @@ func exportControlList() -> void:
 	for line in Lines:
 		file.store_line(line)
 	file.close()
+	
+func openSceneFolder() -> void:
+	var cpath = "user://" + filePath
+	if !DirAccess.dir_exists_absolute(cpath):
+		return
+	OS.shell_open(ProjectSettings.globalize_path(cpath))

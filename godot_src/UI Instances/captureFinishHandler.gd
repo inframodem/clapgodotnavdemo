@@ -5,6 +5,7 @@ var gamecontroller
 func _ready() -> void:
 	gamecontroller = get_tree().get_current_scene().get_node("Game Controller")
 	gamecontroller.exportControlList()
+	gamecontroller.openSceneFolder()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
