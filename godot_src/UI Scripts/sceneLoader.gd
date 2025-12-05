@@ -4,6 +4,7 @@ var currentScene : Node2D
 var viewport : SubViewport
 var scenePathList = []
 var cameraScaleList = []
+var curentUIState = Globals.UI_state.Main_Menu
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

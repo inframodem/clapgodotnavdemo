@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bpptikud0j15c"]
+[gd_scene load_steps=20 format=3 uid="uid://bpptikud0j15c"]
 
 [ext_resource type="Texture2D" uid="uid://b8resjqah13ec" path="res://Assets/UI Components/circle-svgrepo-com.svg" id="1_qbhdu"]
 [ext_resource type="Script" uid="uid://de2taxv1leexl" path="res://UI Scripts/dir_Name_line_edit.gd" id="2_1qpxd"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://clovluovmo66d" path="res://UI Scripts/interval_slider.gd" id="2_vhhk3"]
 [ext_resource type="Script" uid="uid://dfamejs8qi55m" path="res://UI Scripts/delete_dir_button.gd" id="3_jrv0g"]
 [ext_resource type="Script" uid="uid://c5riqq88o8sn8" path="res://UI Scripts/save_scene_button.gd" id="5_cs85k"]
+[ext_resource type="Script" uid="uid://cakkwdt4duxvt" path="res://UI Instances/load_scene_button.gd" id="6_8gau1"]
 
 [sub_resource type="DPITexture" id="DPITexture_ttyw2"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\" fill-opacity=\".37\"/></svg>
@@ -180,6 +181,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_ttyw2")
 text = "Load Scene (Needs to Exist)"
+script = ExtResource("6_8gau1")
 
 [node name="Delete Scene" type="Button" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("warning_text")]
 custom_minimum_size = Vector2(250, 50)

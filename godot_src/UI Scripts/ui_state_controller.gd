@@ -5,19 +5,21 @@ var currentLoadedScene
 @export var current_ui_state = Globals.UI_state.Main_Menu
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	scenes.append(preload("res://UI Instances/Main Menu.tscn").instantiate())
-	scenes.append(preload("res://UI Instances/Options.tscn").instantiate())
-	scenes.append(preload("res://UI Instances/Level Select.tscn").instantiate())
-	scenes.append(preload("res://UI Instances/Scene_Start.tscn").instantiate())
-	scenes.append(preload("res://UI Instances/Scene_Inprogress.tscn").instantiate())
-	scenes.append(preload("res://UI Instances/Scene_Loading.tscn").instantiate())
-	scenes.append(preload("res://UI Instances/Scene_Post.tscn").instantiate())
+	scenes.append(preload("res://UI Instances/Main Menu.tscn"))
+	scenes.append(preload("res://UI Instances/Options.tscn"))
+	scenes.append(preload("res://UI Instances/Level Select.tscn"))
+	scenes.append(preload("res://UI Instances/Scene_Start.tscn"))
+	scenes.append(preload("res://UI Instances/Scene_Inprogress.tscn"))
+	scenes.append(preload("res://UI Instances/Scene_Loading.tscn"))
+	scenes.append(preload("res://UI Instances/Scene_Post.tscn"))
 	currentLoadedScene = get_child(0)
 	
 
 func changeScene(newState: Globals.UI_state) -> void:
+	current_ui_state = newState
 	remove_child(currentLoadedScene)
-	add_child(scenes[newState])
+	var newUI = scenes[newState].instantiate()
+	add_child(newUI)
 	currentLoadedScene = get_child(0)
 	
 func debug() -> void:

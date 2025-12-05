@@ -5,6 +5,8 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/calib3d.hpp>
 #include <utility>
+#include <iostream>
+#include <cmath>
 
 PhotoMatcher::PhotoMatcher(){
 
@@ -57,9 +59,6 @@ void PhotoMatcher::CalculateTranslations(const vector<string>& paths){
         }
 
         vector<Point2f> pointsold, pointsnew;
-        if(i == 34){
-            cout << "Catch" << endl;
-        }
         for(const auto& match : good_matches) {
             pointsold.push_back(keypointsOld[match.trainIdx].pt); // point in image 1
             pointsnew.push_back(keypointsNew[match.queryIdx].pt); // corresponding point in image 2
@@ -68,6 +67,12 @@ void PhotoMatcher::CalculateTranslations(const vector<string>& paths){
         if(operationMode == 2 || operationMode == 3){
             Point2d transpt = ransacTranslateFinder(pointsnew, pointsold);
             RANSACTranslationVects.push_back(transpt);
+            cout << "Images: " << i - 2 << " and " << i - 1 << " finished Processing using RANSAC." << endl;
+        }
+        if(operationMode == 1 || operationMode == 3){
+            Point2d transpt = clapTranslateFinder(pointsnew, pointsold);
+            CLAPTranslationVects.push_back(transpt);
+            cout << "Images: " << i - 2 << " and " << i - 1 << " finished Processing using CLAP." << endl;
         }
         /*
         namedWindow("Good Matches");
@@ -91,13 +96,16 @@ void PhotoMatcher::CalculateTranslations(const vector<string>& paths){
 
 Point2d PhotoMatcher::clapTranslateFinder(vector<Point2f>& pointsnew, vector<Point2f>& pointsold){
     vector<Point2f> diffpoints(pointsnew.size());
-    for (int i = 0; pointsnew.size(); i++){
+    for (int i = 0; i < pointsnew.size(); i++){
         Point2f diff = pointsold[i] - pointsnew[i];
         diffpoints[i] = diff;
     }
-    Mat clusterData(diffpoints.size(), 2, CV_32F);
-    Point2d retpoint;
 
+    Mat clusterData(diffpoints.size(), 2, CV_32F);
+    Point2d retpoint(0.0, 0.0);
+    if(diffpoints.size() <= 1){
+        return retpoint;
+    }
     Mat labels, centers;
     
     for(int reps = 0 ; reps < 5; reps++){
@@ -110,23 +118,26 @@ Point2d PhotoMatcher::clapTranslateFinder(vector<Point2f>& pointsnew, vector<Poi
         vector<pair<float, Point2f>> distPairs;
         float centerX = centers.at<float>(0, 0);
         float centerY = centers.at<float>(0, 1);
-        retpoint.x = centerX;
-        retpoint.y = centerY;
+        retpoint.x = round(centerX);
+        retpoint.y = round(centerY);
         for(int i = 0; i < diffpoints.size(); i++){
             float dx = diffpoints[i].x - centerX;
             float dy = diffpoints[i].y - centerY;
             float dist = dx * dx + dy * dy;
             distPairs.push_back(make_pair(dist, diffpoints[i]));
         }
-        int numToKeep = static_cast<int>(0.8f * diffpoints.size());
-        sort(distPairs.begin(), distPairs.end(),
-          [](const std::pair<float, Point2f> &a, const std::pair<float, Point2f> &b) {
-              return a.first < b.first;
-          });
-        diffpoints.clear();
-        for(int i = 0 ; i < numToKeep; i++){
-            diffpoints.push_back(distPairs[i].second);
+        if(diffpoints.size() > 2){
+            int numToKeep = static_cast<int>(0.8f * diffpoints.size());
+            sort(distPairs.begin(), distPairs.end(),
+            [](const std::pair<float, Point2f> &a, const std::pair<float, Point2f> &b) {
+                return a.first < b.first;
+            });
+            diffpoints.clear();
+            for(int i = 0 ; i < numToKeep; i++){
+                diffpoints.push_back(distPairs[i].second);
+            }
         }
+
         clusterData = Mat(diffpoints.size(), 2, CV_32F);
         labels.release();
         centers.release();
@@ -137,13 +148,33 @@ Point2d PhotoMatcher::clapTranslateFinder(vector<Point2f>& pointsnew, vector<Poi
 }
 
 Point2d PhotoMatcher::ransacTranslateFinder(vector<Point2f>& pointsnew, vector<Point2f>& pointsold ){
+
+    Point2d retpoint(0.0, 0.0);
+    if(pointsnew.size() <= 3 || pointsold.size() <= 3){
+        return retpoint;
+    }
     Mat homography = findHomography(pointsnew, pointsold, RANSAC);
-    double tx = homography.at<double>(0,2);
-    double ty = homography.at<double>(1,2);
-    Point2d retpoint(tx, ty);
+    double tx = 0.0;
+    double ty = 0.0;
+    if (!homography.empty()){
+        tx = round(homography.at<double>(0,2));
+        ty = round(homography.at<double>(1,2));
+    }
+
+    retpoint.x = tx;
+    retpoint.y = ty;
+
     return retpoint;
 }
 
 void PhotoMatcher::setOperationMode(int opmode){
     operationMode = opmode;
+}
+
+vector<Point2d> PhotoMatcher::getCLAPTranslations(){
+    return CLAPTranslationVects;
+}
+
+vector<Point2d> PhotoMatcher::getRANSACTranslations(){
+    return RANSACTranslationVects;
 }

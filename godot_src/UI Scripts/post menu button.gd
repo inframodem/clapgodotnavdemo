@@ -10,7 +10,13 @@ func _pressed() -> void:
 	gamecontroller.setPause(true)
 	gamecontroller.setDirectory("")
 	gamecontroller.setInterval(0.5)
+	gamecontroller.clapVectList.clear()
+	gamecontroller.RANSACVectList.clear()
+	gamecontroller.ControlPosList.clear()
+	gamecontroller.changeGameScene(Globals.Scenes.Blank)
 	gamecontroller.changeUIState(Globals.UI_state.Main_Menu)
+
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

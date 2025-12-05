@@ -1,8 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://miyltmhw26pc"]
+[gd_scene load_steps=18 format=3 uid="uid://miyltmhw26pc"]
 
+[ext_resource type="Script" uid="uid://dg2gvxh6eyryt" path="res://UI Scripts/LinesToggle.gd" id="1_e0o52"]
 [ext_resource type="Script" uid="uid://cxsavxs47p54" path="res://UI Scripts/post menu button.gd" id="1_q6mrm"]
 [ext_resource type="Texture2D" uid="uid://dbd1fssbdrk5n" path="res://Assets/UI Components/scientist sprites/sci down/animate down1.png" id="1_vt3ih"]
+[ext_resource type="Script" uid="uid://cqjmanc5yf7i1" path="res://UI Scripts/manualLoadButton.gd" id="2_kh7nu"]
 [ext_resource type="Script" uid="uid://dtlelopxmhrpt" path="res://UI Scripts/player_animation controller.gd" id="2_q6mrm"]
+[ext_resource type="Script" uid="uid://dnxkppil0rhy" path="res://UI Scripts/final Pos Label.gd" id="3_hppg6"]
 [ext_resource type="Texture2D" uid="uid://bg3v8fb6hnapl" path="res://Assets/UI Components/scientist sprites/sci up/run up1.png" id="3_kh7nu"]
 [ext_resource type="Texture2D" uid="uid://cy0wm0rvnuuyu" path="res://Assets/UI Components/scientist sprites/sci right/animate right1.png" id="4_hppg6"]
 [ext_resource type="Texture2D" uid="uid://cet7d322qnvb" path="res://Assets/UI Components/scientist sprites/sci down/scientist run down.tres" id="5_e0o52"]
@@ -10,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://dugu8c2qi0401" path="res://Assets/UI Components/scientist sprites/sci left/scientist run left.tres" id="7_54fv4"]
 [ext_resource type="Texture2D" uid="uid://bmhrmooq33flt" path="res://Assets/UI Components/scientist sprites/sci right/scientist run right.tres" id="8_rf4d1"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_20ty4"]
+load_path = "res://.godot/imported/animate left1.png-bf1c932192c002dac287c447fb09f8cb.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3aue"]
 bg_color = Color(0.38170326, 0.38170326, 0.3817031, 1)
@@ -28,9 +33,6 @@ bg_color = Color(0.427493, 0.42749307, 0.42749295, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yvxrq"]
 bg_color = Color(0.65012825, 0.6501283, 0.6501282, 1)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_20ty4"]
-load_path = "res://.godot/imported/animate left1.png-bf1c932192c002dac287c447fb09f8cb.ctex"
-
 [node name="ScenePost" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -42,72 +44,6 @@ offset_right = 1.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-
-[node name="Panel" type="Panel" parent="MarginContainer"]
-custom_minimum_size = Vector2(250, 300)
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_b3aue")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
-custom_minimum_size = Vector2(250, 300)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="CheckBox" type="CheckBox" parent="MarginContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Toggle CLAP"
-
-[node name="CheckBox2" type="CheckBox" parent="MarginContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Toggle RANSAC"
-
-[node name="CheckBox3" type="CheckBox" parent="MarginContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Toggle Control"
-
-[node name="Button" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_dnnh6")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_q7kdn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yvxrq")
-text = "Exit Scene"
-script = ExtResource("1_q6mrm")
-
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Clap: 
-Ransac: 
-Control: "
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -132,3 +68,103 @@ runDown = ExtResource("5_e0o52")
 runUp = ExtResource("6_yi78d")
 runLeft = ExtResource("7_54fv4")
 runRight = ExtResource("8_rf4d1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+custom_minimum_size = Vector2(250, 400)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b3aue")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 0, 1, 1)
+button_pressed = true
+text = "Toggle CLAP"
+script = ExtResource("1_e0o52")
+linestate = 2
+
+[node name="CheckBox2" type="CheckBox" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.8745098, 0.8784314, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.8745098, 0.8784314, 0, 1)
+button_pressed = true
+text = "Toggle RANSAC"
+script = ExtResource("1_e0o52")
+linestate = 1
+
+[node name="CheckBox3" type="CheckBox" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.8745098, 0.8745098, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.8745098, 0.8745098, 1)
+button_pressed = true
+text = "Toggle Control"
+script = ExtResource("1_e0o52")
+
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_dnnh6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_q7kdn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yvxrq")
+text = "Exit Scene"
+script = ExtResource("1_q6mrm")
+
+[node name="Button2" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("posLabel")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_dnnh6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_q7kdn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yvxrq")
+text = "Manual Load"
+script = ExtResource("2_kh7nu")
+posLabel = NodePath("../Label")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Clap:
+Ransac: 
+Control: "
+script = ExtResource("3_hppg6")
+
+[connection signal="toggled" from="MarginContainer/MarginContainer/VBoxContainer/CheckBox" to="MarginContainer/MarginContainer/VBoxContainer/CheckBox" method="_on_toggled"]
+[connection signal="toggled" from="MarginContainer/MarginContainer/VBoxContainer/CheckBox2" to="MarginContainer/MarginContainer/VBoxContainer/CheckBox2" method="_on_toggled"]
+[connection signal="toggled" from="MarginContainer/MarginContainer/VBoxContainer/CheckBox3" to="MarginContainer/MarginContainer/VBoxContainer/CheckBox3" method="_on_toggled"]

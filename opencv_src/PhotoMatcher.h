@@ -15,8 +15,8 @@ using namespace cv;
 class PhotoMatcher {
     public:
         PhotoMatcher();
-        void getCLAPTranslations(vector<Point2d> transVectList);
-        void getRANSACTranslations(vector<Point2d> transVectList);
+        vector<Point2d> getCLAPTranslations();
+        vector<Point2d> getRANSACTranslations();
         void setOperationMode(int opmode);
         bool loadFilePaths(const vector<string>& paths);
     

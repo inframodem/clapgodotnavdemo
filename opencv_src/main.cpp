@@ -18,6 +18,8 @@
 
 #include "PhotoMatcher.h"
 
+#include <fstream>
+
 using namespace cv;
 using namespace std;
 
@@ -93,15 +95,28 @@ void loadPhotoPaths(const string& dirPath, vector<string>& pathstrs, vector<stri
     }
 }
 
-int main(int, char**){
+int main(int argc, char* argv[]){
+    //Turns out the measurement in Godot is Pixels so it doesn't need scaling for distance
+
+    if(argc != 3){
+        cout << "Usage: Absolute_Path_to_Directory_of_name_Formated_PNGs Operation_Mode{clap, ransac, clap_ransac}" << endl;
+        cout << "Press Enter to Close the Console" << endl;
+        std::cin.get();
+        return -1;
+    }
 
     //Sanity Test
 	std::cout << "This OpenCV program is running on OpenCV Version "<< CV_VERSION << endl;
-    //Debug Inputs
+
+    /*
+    */
     //Godot's distance measurement is explicitly pixels so a scaling input is not neccessary
-    string dirPath = "C:/Users/algal/AppData/Roaming/Godot/app_userdata/OpenCV Project/test1/";
-    string opmodeStr = "clap_ransac";
+    string dirPath = argv[1];
+    string opmodeStr = argv[2];
     int opmode = 3;
+    //Debug Inputs
+    //string opmodeStr = "clap_ransac";
+    //string dirPath = "C:\\Users\\algal\\AppData\\Roaming\\Godot\\app_userdata\\OpenCV Project\\test3";
 
     if(opmodeStr == "clap_ransac"){
         opmode = 3;
@@ -122,11 +137,68 @@ int main(int, char**){
 
     loadPhotoPaths(dirPath, imagePaths, imageFileNames);
 
+    if(imagePaths.size() <= 1 || imageFileNames.size() <= 1){
+        cout << "Given Directory Contains to few properly formated PNGs" << endl;
+        cout << "Press Enter to Close the Console" << endl;
+        std::cin.get();
+        return 0;
+    }
+
     PhotoMatcher transCalc;
     transCalc.setOperationMode(opmode);
-
     transCalc.loadFilePaths(imagePaths);
 
+    vector<Point2d> clapTrans = transCalc.getCLAPTranslations();
+    vector<Point2d> ransacTrans = transCalc.getRANSACTranslations();
 
+    string correctdPath = dirPath;
+
+    char endingSlash = '/';
+    size_t found = correctdPath.find('\\');
+    if(found != string::npos){
+        endingSlash = '\\';
+    }
+
+    if (!correctdPath.empty() && correctdPath[correctdPath.size() - 1] != endingSlash){
+        correctdPath += endingSlash;
+    }
+
+    string dirName = correctdPath;
+
+
+        // Remove trailing slashes
+    while (!dirName.empty() && (dirName.back() == '/' || dirName.back() == '\\')) {
+        dirName.pop_back();
+    }
+    
+        // Find the last path separator
+    int pos = dirName.find_last_of("/\\");
+
+    if (pos != std::string::npos) {
+        dirName = dirName.substr(pos + 1);  // Everything after the last separator
+    }
+    
+
+    if(opmode == 1 || opmode == 3){
+        ofstream outFile(correctdPath + dirName + "_CLAP.txt");
+        for(int i = 1 ; i < imageFileNames.size(); i++){
+            Point2d cPoint = clapTrans[i - 1];
+            outFile << imageFileNames[i - 1] << " > " << imageFileNames[i] << " : " << cPoint.x << " " << cPoint.y << endl;
+        }
+        outFile.close();
+    }
+
+    if(opmode = 2 || opmode == 3){
+        ofstream outFile(correctdPath + dirName + "_RANSAC.txt");
+        for(int i = 1 ; i < imageFileNames.size(); i++){
+            Point2d cPoint = ransacTrans[i - 1];
+            outFile << imageFileNames[i - 1] << " > " << imageFileNames[i] << " : " << cPoint.x << " " << cPoint.y << endl;
+        }
+        outFile.close();
+    }
+
+    cout << "Press Enter to Close the Console" << endl;
+    std::cin.get();
+    return 0;
 }
 

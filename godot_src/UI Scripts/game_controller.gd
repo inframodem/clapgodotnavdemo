@@ -5,19 +5,30 @@ extends Node
 @export var filePath = ""
 @export var isPaused = true
 @export var isCapturing = false
+@export var capturedFrame = 0
+@export var selectedScene : Globals.Scenes
+
 var sceneLoader : SubViewportContainer
 var viewport : SubViewport
 # Called when the node enters the scene tree for the first time.
-@export var capturedFrame = 0
+
 var sinceLastFrame = 0.0
-var clapVectList = []
-var RANSACVectList = []
-var ControlPosList = []
+@export var clapVectList : PackedVector2Array
+@export var RANSACVectList : PackedVector2Array
+@export var ControlPosList : PackedVector2Array
+
 var cameraControl : CharacterBody2D
 
-@export var selectedScene : Globals.Scenes
+var controlLines : Line2D
+var CLAPLines : Line2D
+var RANSACLines : Line2D
+
+var opencvPath : String
+
+
 
 func _ready() -> void:
+
 	ui_controller = get_node("/root/ui_level/CanvasLayer/UI_State Controller")
 	ui_controller.debug()
 	sceneLoader = get_node("/root/ui_level/CanvasLayer/SubViewportContainer")
@@ -120,7 +131,7 @@ func characterSetter(body : CharacterBody2D):
 func LogControlPos() -> void:
 	if cameraControl == null:
 		return
-	ControlPosList.append(cameraControl.position)
+	ControlPosList.append(round(cameraControl.position))
 	print("logging: " + str(cameraControl.position))
 
 func exportControlList() -> void:
@@ -152,3 +163,92 @@ func openSceneFolder() -> void:
 	if !DirAccess.dir_exists_absolute(cpath):
 		return
 	OS.shell_open(ProjectSettings.globalize_path(cpath))
+
+func getOpenCVProgram() -> bool:
+	var exeDir = OS.get_executable_path().get_base_dir()
+	var exeFilepath = exeDir + "/opencvclap.exe"
+	if FileAccess.file_exists(exeFilepath):
+		return true
+	else:
+		return false
+		
+func executeOpenCVProgram() -> bool:
+	var exeDir = OS.get_executable_path().get_base_dir()
+	var exeFilepath = exeDir + "/opencvclap.exe"
+	var cpath = "user://" + filePath
+	if getOpenCVProgram():
+		OS.create_process(exeFilepath, [ ProjectSettings.globalize_path(cpath), "clap_ransac" ], true)
+		return true
+	else:
+		return false
+		
+func readFile(currFile : FileAccess) -> PackedVector2Array:
+	var retArray : PackedVector2Array
+	retArray.append(Vector2(0.0, 0.0))
+	if currFile == null:
+		return retArray
+	while not currFile.eof_reached():
+		var line = currFile.get_line()
+		
+		if line.strip_edges().is_empty():
+			continue
+		var parts = line.split(" ", false)
+		
+		var posVect : Vector2 = retArray[-1]
+		posVect.x = posVect.x + float(parts[-2])
+		posVect.y = posVect.y + float(parts[-1])
+		retArray.push_back(posVect)
+	currFile.close()
+	return retArray
+		
+func loadTransVectors() -> void:
+	var cpath = "user://" + filePath
+	if !DirAccess.dir_exists_absolute(cpath):
+		return
+	if FileAccess.file_exists(cpath + "/" + filePath + "_CONTROL.txt"):
+		var controlFile = FileAccess.open(cpath + "/" + filePath + "_CONTROL.txt", FileAccess.READ)
+		ControlPosList = readFile(controlFile)
+	if FileAccess.file_exists(cpath + "/" + filePath + "_CLAP.txt"):
+		var clapFile = FileAccess.open(cpath + "/" + filePath + "_CLAP.txt", FileAccess.READ)
+		clapVectList = readFile(clapFile)
+	if FileAccess.file_exists(cpath + "/" + filePath + "_RANSAC.txt"):
+		var ransacFile = FileAccess.open(cpath + "/" + filePath + "_RANSAC.txt", FileAccess.READ)
+		RANSACVectList = readFile(ransacFile)
+
+func retrieveVec2Array(arr : Globals.transLines) -> PackedVector2Array:
+	match arr:
+		Globals.transLines.ControlLines:
+			return ControlPosList
+		Globals.transLines.RANSACLines:
+			return RANSACVectList
+		Globals.transLines.CLAPLines:
+			return clapVectList
+		_:
+			return []
+			
+func getCurrentUISTATE() -> Globals.UI_state:
+	return ui_controller.current_ui_state
+
+func setLines(arr : Globals.transLines, lines : Line2D) -> void:
+	match arr:
+		Globals.transLines.ControlLines:
+			controlLines = lines
+		Globals.transLines.RANSACLines:
+			CLAPLines = lines
+		Globals.transLines.CLAPLines:
+			RANSACLines = lines
+			
+func toggleLinesVisibility(toggle : bool, arr : Globals.transLines) -> void:
+		match arr:
+			Globals.transLines.ControlLines:
+				controlLines.visible = toggle
+			Globals.transLines.RANSACLines:
+				CLAPLines.visible = toggle
+			Globals.transLines.CLAPLines:
+				RANSACLines.visible = toggle
+
+func manualLoadLines() -> void:
+	loadTransVectors()
+	controlLines.manualLoadLines()
+	RANSACLines.manualLoadLines()
+	CLAPLines.manualLoadLines()

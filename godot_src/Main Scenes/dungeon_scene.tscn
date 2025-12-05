@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=4 uid="uid://ddrext3rdd073"]
+[gd_scene load_steps=5 format=4 uid="uid://ddrext3rdd073"]
 
 [ext_resource type="TileSet" uid="uid://cg5kh0mwi8fq7" path="res://Assets/Dungeon/dungeon tile set.tres" id="1_m4x1p"]
 [ext_resource type="Script" uid="uid://dww1nlnsj4dh2" path="res://Scene Scripts/camera_collider_controller.gd" id="2_eopbc"]
+[ext_resource type="Script" uid="uid://cne65xfbc4ldq" path="res://Scene Scripts/LinesController.gd" id="3_2wwy1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2wwy1"]
 radius = 8.0
@@ -25,3 +26,20 @@ script = ExtResource("2_eopbc")
 shape = SubResource("CapsuleShape2D_2wwy1")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="ControlLine2D" type="Line2D" parent="."]
+width = 1.0
+default_color = Color(0, 0.8745098, 0.8745098, 1)
+script = ExtResource("3_2wwy1")
+
+[node name="RANSACLine2D" type="Line2D" parent="."]
+width = 1.0
+default_color = Color(0.8745098, 0.8784314, 0, 1)
+script = ExtResource("3_2wwy1")
+LinesRepresent = 1
+
+[node name="CLAPLine2D" type="Line2D" parent="."]
+width = 1.0
+default_color = Color(1, 0, 1, 1)
+script = ExtResource("3_2wwy1")
+LinesRepresent = 2
