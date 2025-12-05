@@ -1,0 +1,144 @@
+[gd_scene load_steps=3 format=3 uid="uid://xg7i7g6hhcp8"]
+
+[ext_resource type="Theme" uid="uid://c645tdf2p6yf3" path="res://Assets/UI Components/UI Button theme.tres" id="1_1uvf7"]
+[ext_resource type="Script" uid="uid://djunxrny0iipn" path="res://UI Scripts/uistate_change_button.gd" id="2_qyg6a"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1000, 500)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Camera Movemnt Up: Keyboard"
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme = ExtResource("1_1uvf7")
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Controller:"
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme = ExtResource("1_1uvf7")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Camera Movemnt Down: Keyboard"
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme = ExtResource("1_1uvf7")
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Controller:"
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme = ExtResource("1_1uvf7")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Camera Movemnt Left: Keyboard"
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme = ExtResource("1_1uvf7")
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Controller:"
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme = ExtResource("1_1uvf7")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Camera Movemnt Right: Keyboard"
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme = ExtResource("1_1uvf7")
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Controller:"
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme = ExtResource("1_1uvf7")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_1uvf7")
+theme_override_font_sizes/font_size = 32
+text = "Return to Menu"
+script = ExtResource("2_qyg6a")

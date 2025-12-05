@@ -1,0 +1,203 @@
+[gd_scene load_steps=20 format=3 uid="uid://bpptikud0j15c"]
+
+[ext_resource type="Texture2D" uid="uid://b8resjqah13ec" path="res://Assets/UI Components/circle-svgrepo-com.svg" id="1_qbhdu"]
+[ext_resource type="Script" uid="uid://de2taxv1leexl" path="res://UI Scripts/dir_Name_line_edit.gd" id="2_1qpxd"]
+[ext_resource type="Theme" uid="uid://c645tdf2p6yf3" path="res://Assets/UI Components/UI Button theme.tres" id="2_ttyw2"]
+[ext_resource type="Script" uid="uid://clovluovmo66d" path="res://UI Scripts/interval_slider.gd" id="2_vhhk3"]
+[ext_resource type="Script" uid="uid://dfamejs8qi55m" path="res://UI Scripts/delete_dir_button.gd" id="3_jrv0g"]
+[ext_resource type="Script" uid="uid://c5riqq88o8sn8" path="res://UI Scripts/save_scene_button.gd" id="5_cs85k"]
+[ext_resource type="Script" uid="uid://cakkwdt4duxvt" path="res://UI Instances/load_scene_button.gd" id="6_8gau1"]
+
+[sub_resource type="DPITexture" id="DPITexture_ttyw2"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\" fill-opacity=\".37\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_1qpxd"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"4\" height=\"8\"><path fill=\"#fff\" fill-opacity=\".25\" d=\"M1 0h2v16H1z\"/></svg>
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhhk3"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cs85k"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gau1"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="Theme" id="Theme_50chs"]
+HSlider/constants/center_grabber = 0
+HSlider/constants/grabber_offset = -4
+HSlider/constants/tick_offset = 0
+HSlider/icons/grabber = ExtResource("1_qbhdu")
+HSlider/icons/grabber_disabled = SubResource("DPITexture_ttyw2")
+HSlider/icons/grabber_highlight = ExtResource("1_qbhdu")
+HSlider/icons/tick = SubResource("DPITexture_1qpxd")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_vhhk3")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_cs85k")
+HSlider/styles/slider = SubResource("StyleBoxFlat_8gau1")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_t61ep"]
+thickness = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3c1p0"]
+bg_color = Color(0.562261, 0.6589808, 0.9141461, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wcq7"]
+bg_color = Color(0.7666196, 0.76661956, 0.76661944, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttyw2"]
+bg_color = Color(0.11119685, 0.11119685, 0.11119678, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrv0g"]
+bg_color = Color(0.056291588, 0.05629161, 0.05629155, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
+[sub_resource type="Theme" id="Theme_1qpxd"]
+LineEdit/styles/focus = SubResource("StyleBoxFlat_ttyw2")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_jrv0g")
+
+[node name="SceneStart" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2"]
+z_index = -1
+layout_mode = 2
+color = Color(0.2051174, 0.20511746, 0.20511737, 0.42745098)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="Interval Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Screenshot Interval: 0.5 sec."
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("interLabel")]
+layout_mode = 2
+theme = SubResource("Theme_50chs")
+theme_override_constants/center_grabber = 1
+theme_override_styles/slider = SubResource("StyleBoxLine_t61ep")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3c1p0")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_8wcq7")
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 0.5
+tick_count = 10
+ticks_on_borders = true
+script = ExtResource("2_vhhk3")
+interLabel = NodePath("../Interval Label")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme = SubResource("Theme_1qpxd")
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Directory Name (A-Za-z0-9_):"
+max_length = 24
+emoji_menu_enabled = false
+script = ExtResource("2_1qpxd")
+
+[node name="Save Scene" type="Button" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("warninglabel")]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_ttyw2")
+text = "Save Scene"
+script = ExtResource("5_cs85k")
+warninglabel = NodePath("../Warning Label")
+
+[node name="Load Scene" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_ttyw2")
+text = "Load Scene (Needs to Exist)"
+script = ExtResource("6_8gau1")
+
+[node name="Delete Scene" type="Button" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("warning_text")]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_ttyw2")
+text = "Delete Scene"
+script = ExtResource("3_jrv0g")
+warning_text = NodePath("../Warning Label")
+
+[node name="Warning Label" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="drag_ended" from="MarginContainer/VBoxContainer/HSlider" to="MarginContainer/VBoxContainer/HSlider" method="_on_drag_ended"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/MarginContainer/LineEdit" to="MarginContainer/VBoxContainer/MarginContainer/LineEdit" method="_on_text_changed"]

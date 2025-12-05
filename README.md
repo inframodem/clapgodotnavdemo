@@ -17,7 +17,7 @@ Launch Godot and simply import the godot_src directory as a project.
   
 ### OpenCV Set-up
 Currently I will only be including a Windows instructions for set-up mostly due to the seeming  
-neccessity of the Visual Studio 2022 x64 compiler for building OpenCV cmake projects. I'll be looking into Linux compliment if there's time.
+neccessity of the Visual Studio 2022 x64 compiler for building OpenCV cmake projects. Unfortunately due to how OpenCV pre-compiled releases are done, this project will only work on Windows.
 
 ### Windows Set-up for OpenCV with VSCode
 Download and install [OpenCV](https://code.visualstudio.com/download)'s Windows Release, for this project I used 4.12.  
@@ -36,7 +36,10 @@ Install these extensions in VSCode:
 * CMake Tools
 
   
-Although this project is built in VSCode we will need to install [VS Studio](https://visualstudio.microsoft.com/downloads/) for the compiler.
+Although this project is built in VSCode we will need to install [VS Studio](https://visualstudio.microsoft.com/downloads/) for the compiler.  
+  
+_Note: As of writing this, Visual Studio Community has updated to 2026 which is not compatible with OpenCV 4.12, you will have to find a Visual Studio 2022 Comunity installer._
+
 
 Open up opencv_src in VSCode and type:
 ```
@@ -47,7 +50,6 @@ Since a CMakeList.txt file already exists it will ask for a preset.
 Select _Add an New Preset_  then choose _Create from Compilers_.  
 After choose the _Visual Studio Community 2022 Release - x86_amd64_ compiler option.  
   
-_Note: As of writing this, Visual Studio Community has updated to 2026 so simply choose what every year of installation you have._
 
 Then _Configure All Projects_ next to Project Outline under the CMake extension tab in VSCode.
 

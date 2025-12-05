@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcqbccpdju84k"]
+
+[ext_resource type="Script" uid="uid://c0yc0134xevs0" path="res://UI Scripts/game_controller.gd" id="1_0t6y7"]
+[ext_resource type="PackedScene" uid="uid://byxvirbpou8fx" path="res://UI Instances/Main Menu.tscn" id="1_i50f7"]
+[ext_resource type="Script" uid="uid://iik67ykix177" path="res://UI Scripts/ui_state_controller.gd" id="1_le5uf"]
+[ext_resource type="Script" uid="uid://pq5mcimhnaes" path="res://UI Scripts/sceneLoader.gd" id="1_mr08k"]
+
+[node name="ui_level" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+stretch = true
+script = ExtResource("1_mr08k")
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(1536, 864)
+render_target_update_mode = 4
+
+[node name="UI_State Controller" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_le5uf")
+
+[node name="MainMenu" parent="CanvasLayer/UI_State Controller" instance=ExtResource("1_i50f7")]
+layout_mode = 1
+
+[node name="Game Controller" type="Node" parent="."]
+script = ExtResource("1_0t6y7")

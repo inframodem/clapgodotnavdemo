@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw6tsy4f6llym"]
+
+[ext_resource type="Script" uid="uid://3n4q3slrhb7o" path="res://UI Scripts/captureFinishHandler.gd" id="1_gshvg"]
+[ext_resource type="Theme" uid="uid://c645tdf2p6yf3" path="res://Assets/UI Components/UI Button theme.tres" id="1_uvd5s"]
+[ext_resource type="Script" uid="uid://cxca336piably" path="res://UI Scripts/skip button.gd" id="2_80knw"]
+
+[node name="SceneLoading" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gshvg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+color = Color(0.18039216, 0.18039216, 0.18039216, 0.48235294)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Loading...
+Launching File Explorer to Save Location
+Check Console for Progress"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_uvd5s")
+theme_override_font_sizes/font_size = 29
+text = "Skip"
+script = ExtResource("2_80knw")

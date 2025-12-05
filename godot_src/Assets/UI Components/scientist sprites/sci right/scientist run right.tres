@@ -1,0 +1,17 @@
+[gd_resource type="AnimatedTexture" load_steps=5 format=3 uid="uid://bmhrmooq33flt"]
+
+[ext_resource type="Texture2D" uid="uid://cy0wm0rvnuuyu" path="res://Assets/UI Components/scientist sprites/sci right/animate right1.png" id="1_lqux4"]
+[ext_resource type="Texture2D" uid="uid://g4nlulslciq8" path="res://Assets/UI Components/scientist sprites/sci right/animate right2.png" id="2_onyeu"]
+[ext_resource type="Texture2D" uid="uid://xohtdo1rtn0y" path="res://Assets/UI Components/scientist sprites/sci right/animate right3.png" id="3_36u6t"]
+[ext_resource type="Texture2D" uid="uid://dhyqwrgr5mhpx" path="res://Assets/UI Components/scientist sprites/sci right/animate right4.png" id="4_nxa2h"]
+
+[resource]
+frames = 4
+frame_0/texture = ExtResource("1_lqux4")
+frame_0/duration = 0.25
+frame_1/texture = ExtResource("2_onyeu")
+frame_1/duration = 0.25
+frame_2/texture = ExtResource("3_36u6t")
+frame_2/duration = 0.25
+frame_3/texture = ExtResource("4_nxa2h")
+frame_3/duration = 0.25

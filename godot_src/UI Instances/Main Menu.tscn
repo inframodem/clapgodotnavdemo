@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://byxvirbpou8fx"]
+
+[ext_resource type="Theme" uid="uid://c645tdf2p6yf3" path="res://Assets/UI Components/UI Button theme.tres" id="1_tgbrp"]
+[ext_resource type="Script" uid="uid://djunxrny0iipn" path="res://UI Scripts/uistate_change_button.gd" id="1_upnqr"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="Level Select" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_tgbrp")
+theme_override_font_sizes/font_size = 30
+text = "Start Level"
+script = ExtResource("1_upnqr")
+nextUIState = 2
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_tgbrp")
+theme_override_colors/font_outline_color = Color(0.9428228, 0.94282264, 0.94282264, 1)
+theme_override_font_sizes/font_size = 30
+text = "Options"
+script = ExtResource("1_upnqr")
+nextUIState = 1

@@ -12,3 +12,6 @@ opencv_src/out/
 
 #Don't Include .godot which contains Machine specific caches
 godot_src/.godot
+
+#Ignore .vscode
+.vscode/ 
