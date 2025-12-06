@@ -175,13 +175,14 @@ text = "Save Scene"
 script = ExtResource("5_cs85k")
 warninglabel = NodePath("../Warning Label")
 
-[node name="Load Scene" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Load Scene" type="Button" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("warninglabel")]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_ttyw2")
 text = "Load Scene (Needs to Exist)"
 script = ExtResource("6_8gau1")
+warninglabel = NodePath("../Warning Label")
 
 [node name="Delete Scene" type="Button" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("warning_text")]
 custom_minimum_size = Vector2(250, 50)
