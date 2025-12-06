@@ -1,13 +1,8 @@
 # Simple CLAP implementation with Godot and OpenCV
 
-Basic description of your project.
-
-## !!! - WARNING - !!!
-THIS PROJECT IS NOT CLOSE TO BEING COMPLETE!  
-  
-This project is public so my professor can monitor my progress. I will be publishing my in-progress code in the "indev" branch  
-which will be incomplete and will probably produce compile issues and other significant bugs.  
-When confident main will be updated until proceed with caution.
+The process is divided into two different applications: the Godot Application and the OpenCV Application. The Godot application and OpenCV application exchange data using the OS’s filesystem. The two Godot Application has two major “spaces” that need to be built: the U.I.-Space you can use to view/operate the controls (and hopefully change them) and select which scene you want to use for screenshots.  
+  Then there are the scenes themselves where you’re asked to determine the screenshot interval time and start recording. These screenshots are used in the second application, the OpenCV application. The OpenCV application is where the bulk of the work is done.  
+  It will input the screenshots of the OpenCV project and process the images using SIFT, FLANN Matching, and k-means. Outputting a file containing a list of translation vectors.
 
 
 ## Set-up
@@ -56,13 +51,29 @@ Then _Configure All Projects_ next to Project Outline under the CMake extension 
 
 ## Building
 
-Building Instructions are not available right now.
+### Build the OpenCV Project
+If you followed the set up instuctions above simpily press the build button in the same Project Outline button tray next to Configure All Projects called Build All Projects.  
+The executable will appear in out\build\Visual Studio Community 2022 Release - x86_amd64\Debug directory.
 
-
-## Releases
-No Releases are available right now.
+### Build the OpenCV Project
+You can follow Godots offcal [Documentation](https://docs.godotengine.org/en/latest/tutorials/export/exporting_projects.html) for exporting Projects.
 
 ## Usage
 
-Will fill out as the project has a proper release.
+The project is fairly simple to use:  
 
+* Start the opencvclapgodot.exe program with both opencvclap.exe and opencvclapgodot.exe in the same directory.
+* Choose a tileset resolution and the name of the "Scene" you want to save your execution data and sceenshot interval with 0.1 being the smallest and 1 second being the longest then start it.
+* Move the camera around and then stop it once you have enough frames.
+* The program will then launch the OpenCV program in an external shell along with a file explorer containing all you "Scene" data.
+* Once the OpenCV program's finished executing the scene will reopen so you can look at the path
+
+## References
+
+### Original Paper
+
+[A Generalization of CLAP from 3D Localization to Image Processing, A Connection With RANSAC & Hough Transforms](https://arxiv.org/abs/2509.13605v1)  
+by Ruochen Hou, Gabriel I. Fernandez, Alex Xu, Dennis W. Hong
+### Assets
+[32 x 32 Sprites](https://michaelgames.itch.io/2d-action-adventure-rpg-assets) by Michael Games
+[128 x 128 Sprites](https://schwarnhild.itch.io/basic-hand-drawn-tileset-and-asset-pack) by schwarnhild
