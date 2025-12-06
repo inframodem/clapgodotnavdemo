@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://xg7i7g6hhcp8"]
+[gd_scene load_steps=4 format=3 uid="uid://xg7i7g6hhcp8"]
 
 [ext_resource type="Theme" uid="uid://c645tdf2p6yf3" path="res://Assets/UI Components/UI Button theme.tres" id="1_1uvf7"]
+[ext_resource type="Script" uid="uid://dnndfr8r6grbb" path="res://UI Instances/keyremap_button.gd" id="2_lkerv"]
 [ext_resource type="Script" uid="uid://djunxrny0iipn" path="res://UI Scripts/uistate_change_button.gd" id="2_qyg6a"]
 
 [node name="Options" type="Control"]
@@ -45,12 +46,14 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Camera Movemnt Up: Keyboard"
+text = "Camera Movement Up: Keyboard"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 80)
 layout_mode = 2
 theme = ExtResource("1_1uvf7")
+script = ExtResource("2_lkerv")
+action_name = "camera_up"
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -61,6 +64,9 @@ text = "Controller:"
 custom_minimum_size = Vector2(100, 80)
 layout_mode = 2
 theme = ExtResource("1_1uvf7")
+script = ExtResource("2_lkerv")
+action_name = "camera_up"
+input_type = "Controller"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -69,12 +75,14 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Camera Movemnt Down: Keyboard"
+text = "Camera Movement Down: Keyboard"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(100, 80)
 layout_mode = 2
 theme = ExtResource("1_1uvf7")
+script = ExtResource("2_lkerv")
+action_name = "camera_down"
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -85,6 +93,9 @@ text = "Controller:"
 custom_minimum_size = Vector2(100, 80)
 layout_mode = 2
 theme = ExtResource("1_1uvf7")
+script = ExtResource("2_lkerv")
+action_name = "camera_down"
+input_type = "Controller"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -93,12 +104,14 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Camera Movemnt Left: Keyboard"
+text = "Camera Movement Left: Keyboard"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(100, 80)
 layout_mode = 2
 theme = ExtResource("1_1uvf7")
+script = ExtResource("2_lkerv")
+action_name = "camera_left"
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
@@ -109,6 +122,9 @@ text = "Controller:"
 custom_minimum_size = Vector2(100, 80)
 layout_mode = 2
 theme = ExtResource("1_1uvf7")
+script = ExtResource("2_lkerv")
+action_name = "camera_left"
+input_type = "Controller"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -117,12 +133,14 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Camera Movemnt Right: Keyboard"
+text = "Camera Movement Right: Keyboard"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
 custom_minimum_size = Vector2(100, 80)
 layout_mode = 2
 theme = ExtResource("1_1uvf7")
+script = ExtResource("2_lkerv")
+action_name = "camera_right"
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
@@ -133,6 +151,9 @@ text = "Controller:"
 custom_minimum_size = Vector2(100, 80)
 layout_mode = 2
 theme = ExtResource("1_1uvf7")
+script = ExtResource("2_lkerv")
+action_name = "camera_right"
+input_type = "Controller"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 80)
