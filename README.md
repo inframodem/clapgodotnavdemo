@@ -33,7 +33,7 @@ Install these extensions in VSCode:
   
 Although this project is built in VSCode we will need to install [VS Studio](https://visualstudio.microsoft.com/downloads/) for the compiler.  
   
-_Note: As of writing this, Visual Studio Community has updated to 2026 which is not compatible with OpenCV 4.12, you will have to find a Visual Studio 2022 Comunity installer._
+_Note: As of writing this, Visual Studio Community has updated to 2026 which is not compatible with OpenCV 4.12, you will have to find a Visual Studio 2022 Community installer._
 
 
 Open up opencv_src in VSCode and type:
