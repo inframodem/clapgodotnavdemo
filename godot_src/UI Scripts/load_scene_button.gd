@@ -8,7 +8,7 @@ func _ready() -> void:
 
 func _pressed() -> void:
 		var cpath = "user://" + gamecontroller.filePath
-		if !DirAccess.dir_exists_absolute(cpath):
+		if !DirAccess.dir_exists_absolute(cpath) || gamecontroller.filePath == "":
 			warninglabel.text = "Directory doesn't Exists!"
 			return
 		gamecontroller.loadTransVectors()
