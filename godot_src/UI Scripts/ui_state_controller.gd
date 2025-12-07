@@ -1,9 +1,13 @@
+# Open CV Project: 12/1/2025
+# Generates screenshots to use in OpenCV to process them with CLAP and RANSAC
 extends Control
 
 var scenes = []
 var currentLoadedScene
 @export var current_ui_state = Globals.UI_state.Main_Menu
 # Called when the node enters the scene tree for the first time.
+# Input Gets gamecontroller
+#Output sets Gamecontroller locally and preloads UI States
 func _ready() -> void:
 	scenes.append(preload("res://UI Instances/Main Menu.tscn"))
 	scenes.append(preload("res://UI Instances/Options.tscn"))
@@ -15,6 +19,8 @@ func _ready() -> void:
 	currentLoadedScene = get_child(0)
 	
 
+#Input called in gamecontroller with desired UI state enum
+#Output Changes UI State to input UI_State
 func changeScene(newState: Globals.UI_state) -> void:
 	current_ui_state = newState
 	remove_child(currentLoadedScene)

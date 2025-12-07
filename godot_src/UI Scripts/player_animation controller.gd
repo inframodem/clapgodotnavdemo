@@ -1,3 +1,6 @@
+# Open CV Project: 12/1/2025
+# Generates screenshots to use in OpenCV to process them with CLAP and RANSAC
+
 extends TextureRect
 @export var idleDown: Texture
 @export var idleUp: Texture
@@ -11,12 +14,15 @@ extends TextureRect
 
 var lastAnimationState := 0
 var gamecontroller : Node
-# Called when the node enters the scene tree for the first time.
+# Input Gets gamecontroller
+#Output sets Gamecontroller locally
 func _ready() -> void:
 	gamecontroller = get_tree().get_current_scene().get_node("Game Controller")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+#Input Input mapped controls are pressed
+#Output Sets player animation to "simulate" a character to display collider
 func _process(delta: float) -> void:
 	var isPaused = gamecontroller.isPaused
 	var axisy = Input.get_axis("camera_up", "camera_down")

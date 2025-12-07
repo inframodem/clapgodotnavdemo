@@ -1,3 +1,5 @@
+# Open CV Project: 12/1/2025
+# Generates screenshots to use in OpenCV to process them with CLAP and RANSAC
 extends SubViewportContainer
 
 var currentScene : Node2D
@@ -6,7 +8,8 @@ var scenePathList = []
 var cameraScaleList = []
 var curentUIState = Globals.UI_state.Main_Menu
 
-# Called when the node enters the scene tree for the first time.
+# Input Gets gamecontroller
+#Output sets Gamecontroller locally and the scenes on disk
 func _ready() -> void:
 	viewport = get_node("SubViewport")
 	cameraScaleList.append(1)
@@ -21,6 +24,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+#Input Called in game controller
+#Output loads scene under subviewport for fixed resolution rendering for easy capturing and display
 func loadScene(nextScene : Globals.Scenes) -> bool:
 	var hasLoaded = false
 	if(viewport.get_children().size() > 0):
@@ -37,5 +42,7 @@ func loadScene(nextScene : Globals.Scenes) -> bool:
 		hasLoaded = true
 	return hasLoaded
 
+#Input Called in game controller
+#Output returns subviewport so gamecontroller can use it for taking screenshots
 func getSubViewport() -> SubViewport:
 	return viewport

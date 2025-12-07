@@ -1,3 +1,8 @@
+# Open CV Project: 12/1/2025
+# Generates screenshots to use in OpenCV to process them with CLAP and RANSAC
+
+#Behold the Game Controller it does everything behold bad software practices incarnate
+#good thing I'm never updating this project
 extends Node
 
 @export var ui_controller: Control
@@ -26,30 +31,42 @@ var RANSACLines : Line2D
 var opencvPath : String
 
 
-
+#Input Gets all other main Ui State components
+#Output stores the nodes locally
 func _ready() -> void:
-
 	ui_controller = get_node("/root/ui_level/CanvasLayer/UI_State Controller")
 	ui_controller.debug()
 	sceneLoader = get_node("/root/ui_level/CanvasLayer/SubViewportContainer")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+#input checks to see if the gamecontroller should be capturing frames
+#output creates a new screen shot and stores new translation vector
 func _process(delta: float) -> void:
 	if isCapturing:
 		captureProcess(delta)
-	
+
+#input UI State Enum value
+#output Changes UI state to another one
 func changeUIState(newState: Globals.UI_state) -> void:
 	ui_controller.changeScene(newState)
-	
+
+#input capture frame interval float
+#output local frame interval set
 func setInterval(newInter: float) -> void:
 	frameInterval = newInter
-	
+
+#input capture frame save path string
+#output scene's output path is saved locally
 func setDirectory(newDir: String) -> void:
 	filePath = newDir
-	
+
+#Input Boolean on camera movement pause
+#Output determines if the camera can be moved
 func setPause(pause: bool) -> void:
 	isPaused = pause
 
+#Input Scene Enum Value
+#Output Changes the current scene to the scene the enum represents
 func changeGameScene(cScene : Globals.Scenes) -> bool:
 	var status : bool = sceneLoader.loadScene(cScene)
 	if status:
@@ -59,6 +76,8 @@ func changeGameScene(cScene : Globals.Scenes) -> bool:
 		print("Failed to Change Scene")
 		return status
 
+#Input Called from Start Scene Button
+#Output Starts 
 func startCapture() -> bool:
 	var cpath = "user://" + filePath
 	if DirAccess.dir_exists_absolute(cpath):
@@ -81,6 +100,8 @@ func startCapture() -> bool:
 		isCapturing = true
 	return status
 
+#input checks to see if the gamecontroller should be capturing frames
+#output creates a new screen shot and stores new translation vector
 func captureProcess(delta: float) -> void:
 	sinceLastFrame += delta
 	if sinceLastFrame < frameInterval:
@@ -91,13 +112,16 @@ func captureProcess(delta: float) -> void:
 	frame.save_png(cpath + "/" + filePath + "-" + str(capturedFrame) + ".png")
 	capturedFrame += 1
 	LogControlPos()
-	
+
+#input Called by Stop Capture Button
+#output Stops Capturing in _process function
 func stopCapture() -> void:
 	isCapturing = false
 	capturedFrame = 0
 	sinceLastFrame = 0.0
 	
-
+#input Called in Delete Scene Button
+#output removes current filePath Directory Recursively
 func removeDirectory() -> bool:
 	var cpath = "user://" + filePath 
 	if !DirAccess.dir_exists_absolute(cpath):
@@ -105,6 +129,8 @@ func removeDirectory() -> bool:
 	delete_dir_recursive(cpath)
 	return true
 
+#input Called in Delete Scene Button
+#output removes current filePath Directory Recursively
 func delete_dir_recursive(path: String) -> void:
 	var d := DirAccess.open(path)
 	if d == null:
@@ -125,15 +151,21 @@ func delete_dir_recursive(path: String) -> void:
 		item = d.get_next()
 	DirAccess.remove_absolute(path)
 
+#input Called in Loaded Scene from the Character Controller
+#output sets cameraController for logging Positions
 func characterSetter(body : CharacterBody2D):
 	cameraControl = body
 
+#input Called in captureProcess function
+#output logs transform position cameraController for translation vector list rounded to nearest pixel
 func LogControlPos() -> void:
 	if cameraControl == null:
 		return
 	ControlPosList.append(round(cameraControl.position))
 	print("logging: " + str(cameraControl.position))
 
+#input Called in capture stop button
+#output Creates the text file of control vectors
 func exportControlList() -> void:
 	var controlVecLines = []
 	if ControlPosList.size() < 2:
@@ -158,12 +190,16 @@ func exportControlList() -> void:
 		file.store_line(line)
 	file.close()
 	
+#input Called in scene loading controller
+#output Opens up a file explorer of the Scene Folder
 func openSceneFolder() -> void:
 	var cpath = "user://" + filePath
 	if !DirAccess.dir_exists_absolute(cpath):
 		return
 	OS.shell_open(ProjectSettings.globalize_path(cpath))
 
+#input Called in scene loading controller
+#output Executes OpenCV Program that creates translation vector data
 func getOpenCVProgram() -> bool:
 	var exeDir = OS.get_executable_path().get_base_dir()
 	var exeFilepath = exeDir + "/opencvclap.exe"
@@ -171,7 +207,9 @@ func getOpenCVProgram() -> bool:
 		return true
 	else:
 		return false
-		
+
+#input Called in scene loading controller
+#output Executes OpenCV Program that creates translation vector data
 func executeOpenCVProgram() -> bool:
 	var exeDir = OS.get_executable_path().get_base_dir()
 	var exeFilepath = exeDir + "/opencvclap.exe"
@@ -182,6 +220,8 @@ func executeOpenCVProgram() -> bool:
 	else:
 		return false
 		
+#input Called in loadTransVectors function
+#output Creates a Vector2Array of positions from translation vectors
 func readFile(currFile : FileAccess) -> PackedVector2Array:
 	var retArray : PackedVector2Array
 	retArray.append(Vector2(0.0, 0.0))
@@ -200,7 +240,9 @@ func readFile(currFile : FileAccess) -> PackedVector2Array:
 		retArray.push_back(posVect)
 	currFile.close()
 	return retArray
-		
+
+#input Called in a bunch of different buttons and nodes in Scene Post UI and scene 
+#output Creates a Vector2Array of positions from translation vectors in game controller for extraction
 func loadTransVectors() -> void:
 	var cpath = "user://" + filePath
 	if !DirAccess.dir_exists_absolute(cpath):
@@ -215,6 +257,8 @@ func loadTransVectors() -> void:
 		var ransacFile = FileAccess.open(cpath + "/" + filePath + "_RANSAC.txt", FileAccess.READ)
 		RANSACVectList = readFile(ransacFile)
 
+#input Called in line2ds in scene space for displaying path using Enum of transLines
+#output Returns held Vector2Array in game controller 
 func retrieveVec2Array(arr : Globals.transLines) -> PackedVector2Array:
 	match arr:
 		Globals.transLines.ControlLines:
@@ -225,10 +269,14 @@ func retrieveVec2Array(arr : Globals.transLines) -> PackedVector2Array:
 			return clapVectList
 		_:
 			return []
-			
+
+#input Called in line2ds to determine if they should display lines
+#output current UI State enum held by UI State Controller
 func getCurrentUISTATE() -> Globals.UI_state:
 	return ui_controller.current_ui_state
 
+#input Called in lines2d to set self in gamecontroller
+#output gamecontroller holds the input line2d
 func setLines(arr : Globals.transLines, lines : Line2D) -> void:
 	match arr:
 		Globals.transLines.ControlLines:
@@ -237,7 +285,9 @@ func setLines(arr : Globals.transLines, lines : Line2D) -> void:
 			CLAPLines = lines
 		Globals.transLines.CLAPLines:
 			RANSACLines = lines
-			
+
+#input Called in checkboxes to determine if Lines should be visible based on enum
+#output changes lines visibility based on enum
 func toggleLinesVisibility(toggle : bool, arr : Globals.transLines) -> void:
 		match arr:
 			Globals.transLines.ControlLines:
@@ -247,6 +297,8 @@ func toggleLinesVisibility(toggle : bool, arr : Globals.transLines) -> void:
 			Globals.transLines.CLAPLines:
 				RANSACLines.visible = toggle
 
+#input Called in load translation vectors 
+#output Reloads point vectors in line2d to display them
 func manualLoadLines() -> void:
 	loadTransVectors()
 	controlLines.manualLoadLines()

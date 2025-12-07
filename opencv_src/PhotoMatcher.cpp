@@ -1,3 +1,10 @@
+/* Project: Final project: SIFT Feature Matching
+	Student: Alexander Peterson
+   File: PhotoMatcher.cpp
+   Date: 11/26/2025
+   Description: This program performs SIFT Keypoint Matching on two images of kittens and matches features between the two using brute force.
+*/
+
 #include "PhotoMatcher.h"
 #include <opencv2/features2d.hpp>
 #include <opencv2/core.hpp>
@@ -7,11 +14,14 @@
 #include <utility>
 #include <iostream>
 #include <cmath>
-
+//Input: Empty Constructor
+//Output: Empty Constructor
 PhotoMatcher::PhotoMatcher(){
 
 }
 
+//Input: Vector of filePaths
+//Output: Runs Calculations
 bool PhotoMatcher::loadFilePaths(const vector<string>& paths){
     if(paths.size() <= 1){
         return false;
@@ -22,11 +32,13 @@ bool PhotoMatcher::loadFilePaths(const vector<string>& paths){
     return true;
 }
 
+//Input: Vector of filePaths
+//Output: Sets Classes' CLAP and RANSAC Translation Vector
 void PhotoMatcher::CalculateTranslations(const vector<string>& paths){
 
     CLAPTranslationVects.clear();
     RANSACTranslationVects.clear();
-
+    //Set starting images
     Mat imageOld = imread(paths[0], IMREAD_GRAYSCALE);
     Mat imageNew = imread(paths[1], IMREAD_GRAYSCALE);
     Ptr<SIFT> dectector = SIFT::create();
@@ -34,7 +46,7 @@ void PhotoMatcher::CalculateTranslations(const vector<string>& paths){
     vector<KeyPoint> keypointsOld, keypointsNew;
     Mat desciptorOld, descriptorNew;
     dectector->detectAndCompute(imageOld, noArray(), keypointsOld, desciptorOld);
-
+    //Loop through images
     for(int i = 2; i <= paths.size(); i++){
 
         dectector->detectAndCompute(imageNew, noArray(), keypointsNew, descriptorNew);
@@ -57,18 +69,19 @@ void PhotoMatcher::CalculateTranslations(const vector<string>& paths){
                 good_matches.push_back(best);
             }
         }
-
+        //Create train and query vectors in image reverse order to get proper translation vector
         vector<Point2f> pointsold, pointsnew;
         for(const auto& match : good_matches) {
             pointsold.push_back(keypointsOld[match.trainIdx].pt); // point in image 1
             pointsnew.push_back(keypointsNew[match.queryIdx].pt); // corresponding point in image 2
         } 
-
+        //Perform RANSAC
         if(operationMode == 2 || operationMode == 3){
             Point2d transpt = ransacTranslateFinder(pointsnew, pointsold);
             RANSACTranslationVects.push_back(transpt);
             cout << "Images: " << i - 2 << " and " << i - 1 << " finished Processing using RANSAC." << endl;
         }
+        //Perform CLAP
         if(operationMode == 1 || operationMode == 3){
             Point2d transpt = clapTranslateFinder(pointsnew, pointsold);
             CLAPTranslationVects.push_back(transpt);
@@ -83,6 +96,7 @@ void PhotoMatcher::CalculateTranslations(const vector<string>& paths){
         imshow("Good Matches", big);
         waitKey(0);
         */
+       //Set new images keep the old image New to improve performance
        if(i < paths.size()){
             imageOld = move(imageNew);
             keypointsOld = move(keypointsNew);
@@ -94,7 +108,10 @@ void PhotoMatcher::CalculateTranslations(const vector<string>& paths){
 
 }
 
-Point2d PhotoMatcher::clapTranslateFinder(vector<Point2f>& pointsnew, vector<Point2f>& pointsold){
+//Input: Vectors of new and old SIFT Points
+//Output: Returns a point 2d with translation vector
+Point2d PhotoMatcher::clapTranslateFinder(const vector<Point2f>& pointsnew, const vector<Point2f>& pointsold){
+    //Get all possible Translation vectors
     vector<Point2f> diffpoints(pointsnew.size());
     for (int i = 0; i < pointsnew.size(); i++){
         Point2f diff = pointsold[i] - pointsnew[i];
@@ -107,7 +124,7 @@ Point2d PhotoMatcher::clapTranslateFinder(vector<Point2f>& pointsnew, vector<Poi
         return retpoint;
     }
     Mat labels, centers;
-    
+    //Perform Clustering 5 times
     for(int reps = 0 ; reps < 5; reps++){
 
         for(int i = 0; i < diffpoints.size(); i++){
@@ -126,6 +143,7 @@ Point2d PhotoMatcher::clapTranslateFinder(vector<Point2f>& pointsnew, vector<Poi
             float dist = dx * dx + dy * dy;
             distPairs.push_back(make_pair(dist, diffpoints[i]));
         }
+        //Perform triming 20% of vectors
         if(diffpoints.size() > 2){
             int numToKeep = static_cast<int>(0.8f * diffpoints.size());
             sort(distPairs.begin(), distPairs.end(),
@@ -137,7 +155,7 @@ Point2d PhotoMatcher::clapTranslateFinder(vector<Point2f>& pointsnew, vector<Poi
                 diffpoints.push_back(distPairs[i].second);
             }
         }
-
+        //Reload Vector data
         clusterData = Mat(diffpoints.size(), 2, CV_32F);
         labels.release();
         centers.release();
@@ -147,7 +165,9 @@ Point2d PhotoMatcher::clapTranslateFinder(vector<Point2f>& pointsnew, vector<Poi
     return retpoint;
 }
 
-Point2d PhotoMatcher::ransacTranslateFinder(vector<Point2f>& pointsnew, vector<Point2f>& pointsold ){
+//Input: Vectors of new and old SIFT Points
+//Output: Returns a point 2d with translation vector
+Point2d PhotoMatcher::ransacTranslateFinder(const vector<Point2f>& pointsnew, const vector<Point2f>& pointsold ){
 
     Point2d retpoint(0.0, 0.0);
     if(pointsnew.size() <= 3 || pointsold.size() <= 3){
@@ -167,14 +187,20 @@ Point2d PhotoMatcher::ransacTranslateFinder(vector<Point2f>& pointsnew, vector<P
     return retpoint;
 }
 
+//Input: INT representing operation mode
+//Output: Sets classes' operation mode
 void PhotoMatcher::setOperationMode(int opmode){
     operationMode = opmode;
 }
 
+//Input: Void
+//Output: A Vector with CLAP resulting translation vectors
 vector<Point2d> PhotoMatcher::getCLAPTranslations(){
     return CLAPTranslationVects;
 }
 
+//Input: Void
+//Output: A Vector with RANSAC resulting translation vectors
 vector<Point2d> PhotoMatcher::getRANSACTranslations(){
     return RANSACTranslationVects;
 }
