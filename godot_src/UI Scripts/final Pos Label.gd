@@ -1,11 +1,15 @@
+# Open CV Project: 12/1/2025
+# Generates screenshots to use in OpenCV to process them with CLAP and RANSAC
 extends Label
 
 var gamecontroller
-# Called when the node enters the scene tree for the first time.
+# Input Gets gamecontroller
+#Output sets Gamecontroller locally also recieves final position
 func _ready() -> void:
 	gamecontroller = get_tree().get_current_scene().get_node("Game Controller")
 	loadFinalPoses()
-		
+#Input: Gets gamecontrolle translation Vectors
+#Output: Sets text as the final position
 func loadFinalPoses():
 	var labeltext = ""
 	if gamecontroller.clapVectList.size() > 0:

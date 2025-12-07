@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://xg7i7g6hhcp8"]
 
 [ext_resource type="Theme" uid="uid://c645tdf2p6yf3" path="res://Assets/UI Components/UI Button theme.tres" id="1_1uvf7"]
-[ext_resource type="Script" uid="uid://dnndfr8r6grbb" path="res://UI Instances/keyremap_button.gd" id="2_lkerv"]
+[ext_resource type="Script" uid="uid://dnndfr8r6grbb" path="res://UI Scripts/keyremap_button.gd" id="2_lkerv"]
 [ext_resource type="Script" uid="uid://djunxrny0iipn" path="res://UI Scripts/uistate_change_button.gd" id="2_qyg6a"]
 
 [node name="Options" type="Control"]

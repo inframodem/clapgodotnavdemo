@@ -1,3 +1,6 @@
+# Open CV Project: 12/1/2025
+# Generates screenshots to use in OpenCV to process them with CLAP and RANSAC
+
 extends Button
 @export var warning_text : Label
 var gamecontroller : Node
@@ -5,9 +8,13 @@ var numPressed = 0
 @export var revertCooldown = 10.0
 var curCooldown = 0.0
 # Called when the node enters the scene tree for the first time.
+# Input Gets gamecontroller
+#Output sets Gamecontroller locally
 func _ready() -> void:
 	gamecontroller = get_tree().get_current_scene().get_node("Game Controller")
 
+# Input Gets path from gamecontroller when button is pressed
+# Output Deletes it using Gamecontrollers built in function
 func _pressed() -> void:
 	var dirName : String = gamecontroller.filePath
 	if(dirName.length() < 5):
@@ -29,6 +36,8 @@ func _pressed() -> void:
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+#Input: Pressed Delete button
+#Output: Acts as a cooldown and returns to normal if expires
 func _process(delta: float) -> void:
 	if numPressed > 0 and curCooldown <= 0:
 		self.text = "Delete Scene"

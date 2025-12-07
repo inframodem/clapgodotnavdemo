@@ -1,5 +1,9 @@
+# Open CV Project: 12/1/2025
+# Generates screenshots to use in OpenCV to process them with CLAP and RANSAC
+
 extends Node
 
+#Holds all the enums shared among the Classes
 enum UI_state { Main_Menu, Options, Level_Select, Level_Start, Level_Inprogress, Level_Loading, Level_Post }
 enum Scenes { Blank, Dungeon, Park }
 enum transLines { ControlLines, RANSACLines, CLAPLines }

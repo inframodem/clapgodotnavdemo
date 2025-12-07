@@ -1,3 +1,6 @@
+# Open CV Project: 12/1/2025
+# Generates screenshots to use in OpenCV to process them with CLAP and RANSAC
+
 extends CharacterBody2D
 
 
@@ -8,10 +11,10 @@ func _ready() -> void:
 	gamecontroller = get_tree().get_current_scene().get_node("Game Controller")
 	gamecontroller.characterSetter(self)
 
+#Called every Frame inputs deltaTime between each frame and outputs nothing but moves attached Collider
 func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var isPaused = gamecontroller.isPaused
 	var directiony := Input.get_axis("camera_up", "camera_down")
 	var directionx := Input.get_axis("camera_left", "camera_right")
