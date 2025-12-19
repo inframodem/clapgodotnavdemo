@@ -15,7 +15,7 @@ Currently I will only be including a Windows instructions for set-up mostly due 
 neccessity of the Visual Studio 2022 x64 compiler for building OpenCV cmake projects. Unfortunately due to how OpenCV pre-compiled releases are done, this project will only work on Windows.
 
 ### Windows Set-up for OpenCV with VSCode
-Download and install [OpenCV](https://code.visualstudio.com/download)'s Windows Release, for this project I used 4.12.  
+Download and install [OpenCV](https://opencv.org/releases/)'s Windows Release, for this project I used 4.12.  
 You will need to include your own .env file in the opencv_src directory.  
 Insert the following in your .env :
 ```
